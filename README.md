@@ -1,3 +1,5 @@
+[![CI Pipeline](https://github.com/dominikcebula/spring-web-http-payload-logger/actions/workflows/maven.yml/badge.svg)](https://github.com/dominikcebula/spring-web-http-payload-logger/actions/workflows/maven.yml)
+
 # 📦 Spring Web HTTP Payload Logger
 
 ## ℹ️ Introduction
