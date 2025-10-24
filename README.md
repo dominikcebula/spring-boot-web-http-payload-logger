@@ -16,6 +16,7 @@ c.d.s.h.p.logger.HttpLoggingFilter       : URL: /api/ping?param1=value1&param2=v
 c.d.s.h.p.logger.HttpLoggingFilter       : Headers: {accept=text/plain, application/json, application/*+json, */*, x-test=test-header-value, user-agent=Java/17.0.15, host=localhost:34491, connection=keep-alive}
 c.d.s.h.p.logger.HttpLoggingFilter       : Body: hello world
 c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP REQUEST - END =======================
+
 c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP RESPONSE - BEGIN =====================
 c.d.s.h.p.logger.HttpLoggingFilter       : Status: 200
 c.d.s.h.p.logger.HttpLoggingFilter       : Method: GET
