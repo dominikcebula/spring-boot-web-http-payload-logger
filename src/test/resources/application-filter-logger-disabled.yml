@@ -1,0 +1,3 @@
+logging:
+  level:
+    com.dominikcebula.spring.http.payload.logger.HttpLoggingFilter: off
