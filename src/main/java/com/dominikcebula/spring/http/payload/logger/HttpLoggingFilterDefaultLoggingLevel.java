@@ -18,7 +18,7 @@ public class HttpLoggingFilterDefaultLoggingLevel implements EnvironmentPostProc
             Map<String, Object> props = new HashMap<>();
             props.put(LOGGING_LEVEL_PROPERTY, "DEBUG");
 
-            MapPropertySource source = new MapPropertySource("spring-web-http-payload-logger-logging-defaults", props);
+            MapPropertySource source = new MapPropertySource("spring-boot-web-http-payload-logger-logger-logging-defaults", props);
 
             environment.getPropertySources().addLast(source);
         }

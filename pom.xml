@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dominikcebula.spring</groupId>
-    <artifactId>spring-web-http-payload-logger</artifactId>
+    <artifactId>spring-boot-web-http-payload-logger</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>

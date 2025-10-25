@@ -1,10 +1,10 @@
 [![CI Pipeline](https://github.com/dominikcebula/spring-web-http-payload-logger/actions/workflows/maven.yml/badge.svg)](https://github.com/dominikcebula/spring-web-http-payload-logger/actions/workflows/maven.yml)
 
-# 📦 Spring Web HTTP Payload Logger
+# 📦 Spring Boot Web HTTP Payload Logger
 
 ## ℹ️ Introduction
 
-Spring Web HTTP Payload Logger is a reusable library that enables logging of HTTP request and response payloads in
+Spring Boot Web HTTP Payload Logger is a reusable library that enables logging of HTTP request and response payloads in
 Spring Web applications. It provides an easy way to monitor and debug HTTP communications by capturing and logging the
 payloads of incoming requests and outgoing responses.
 
@@ -37,7 +37,7 @@ To use this library in your Spring Web application, add the dependency to your `
 
 <dependency>
     <groupId>com.dominikcebula.spring</groupId>
-    <artifactId>spring-web-http-payload-logger</artifactId>
+    <artifactId>spring-boot-web-http-payload-logger</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 </dependency>
 ```
@@ -57,7 +57,11 @@ TBD
 
 TBD
 
-### Enable/Disable Logger
+#### Using Logger Level
+
+TBD
+
+### Enable/Disable Error Only Payload Logging
 
 TBD
 
