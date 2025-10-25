@@ -176,4 +176,16 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) {
         return false;
     }
+
+    @Override
+    protected void initFilterBean() throws ServletException {
+        super.initFilterBean();
+        log.debug("HTTP Payload Logger initialized.");
+    }
+
+    @Override
+    public void destroy() {
+        super.destroy();
+        log.debug("HTTP Payload Logger destroyed.");
+    }
 }
