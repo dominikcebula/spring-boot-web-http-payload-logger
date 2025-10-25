@@ -45,6 +45,22 @@ To use this library in your Spring Web application, add the dependency to your `
 You do not need any additional configuration. The library will automatically self-configure to log HTTP request and
 response payloads.
 
+## ⚙️ Customize
+
+### Enable/Disable Payload Logging
+
+#### Using Spring Boot Properties
+
+TBD
+
+#### Using Environment Variable
+
+TBD
+
+### Enable/Disable Logger
+
+TBD
+
 ## ✍️ Author
 
 Dominik Cebula
