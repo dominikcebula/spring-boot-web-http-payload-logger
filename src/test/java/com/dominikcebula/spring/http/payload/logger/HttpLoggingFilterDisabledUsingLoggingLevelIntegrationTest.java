@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(classes = SampleApplicationForTesting.class, webEnvironment = RANDOM_PORT)
-@ActiveProfiles({"filter-logger-disabled"})
-public class HttpLoggingFilterDisabledIntegrationTest {
+@ActiveProfiles({"filter-logger-disabled-using-logging-level"})
+public class HttpLoggingFilterDisabledUsingLoggingLevelIntegrationTest {
     @LocalServerPort
     private int port;
 

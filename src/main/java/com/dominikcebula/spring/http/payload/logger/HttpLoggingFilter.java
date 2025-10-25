@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class HttpLoggingFilter extends OncePerRequestFilter {
 
-    private static final Log log = LogFactory.getLog(HttpLoggingFilter.class);
+    private static final Log log = LogFactory.getLog("payload.logger.http");
 
     @Override
     protected void doFilterInternal(

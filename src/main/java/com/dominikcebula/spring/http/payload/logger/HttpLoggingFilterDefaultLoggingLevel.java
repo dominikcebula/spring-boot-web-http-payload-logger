@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HttpLoggingFilterDefaultLoggingLevel implements EnvironmentPostProcessor {
-    private static final String LOGGING_LEVEL_PROPERTY = "logging.level.com.dominikcebula.spring.http.payload.logger.HttpLoggingFilter";
+    private static final String LOGGING_LEVEL_PROPERTY = "logging.level.payload.logger.http";
 
     @Override
     public void postProcessEnvironment(ConfigurableEnvironment environment,
