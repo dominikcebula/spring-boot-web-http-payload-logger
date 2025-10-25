@@ -9,13 +9,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(classes = SampleApplicationForTesting.class, webEnvironment = RANDOM_PORT)
-@ActiveProfiles({"filter-logger-enabled"})
 public class HttpLoggingFilterEnabledIntegrationTest {
     @LocalServerPort
     private int port;

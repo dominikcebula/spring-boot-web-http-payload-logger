@@ -31,9 +31,7 @@ c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP RESPONSE - END =============
 
 ## 🚀 Usage
 
-To use this library in your Spring Web application, follow these steps:
-
-1. ➕ Add the dependency to your `pom.xml`:
+To use this library in your Spring Web application, add the dependency to your `pom.xml`:
 
 ```xml
 
@@ -44,32 +42,8 @@ To use this library in your Spring Web application, follow these steps:
 </dependency>
 ```
 
-2. ⚙️ Register the `HttpLoggingFilter` in your Spring Web application configuration:
-
-```java
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-public class HttpLoggingFilterConfig {
-    @Bean
-    public FilterRegistrationBean<HttpLoggingFilter> httpLoggingFilterRegistration() {
-        FilterRegistrationBean<HttpLoggingFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new HttpLoggingFilter());
-        registrationBean.setOrder(Integer.MIN_VALUE);
-        return registrationBean;
-    }
-}
-```
-
-3. 🛠️ Enable logging in your `application.yml`:
-
-```yaml
-logging:
-  level:
-    com.dominikcebula.spring.http.payload.logger.HttpLoggingFilter: DEBUG
-```
+You do not need any additional configuration. The library will automatically self-configure to log HTTP request and
+response payloads.
 
 ## ✍️ Author
 
