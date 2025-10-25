@@ -31,7 +31,7 @@ c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP RESPONSE - END =============
 
 ## 🚀 Usage
 
-To use this library in your Spring Web application, add the dependency to your `pom.xml`:
+To use this library in your Spring Boot Web application, add the dependency to your `pom.xml`:
 
 ```xml
 
@@ -48,6 +48,9 @@ response payloads.
 ## ⚙️ Customize
 
 ### Enable/Disable Payload Logging
+
+Just after adding the dependency, the HTTP payload logging is enabled by default. You can disable or enable it using one
+of the methods described below.
 
 #### Using Spring Boot Properties
 
