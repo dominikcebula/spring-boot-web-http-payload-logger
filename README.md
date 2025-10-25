@@ -1,4 +1,4 @@
-[![CI Pipeline](https://github.com/dominikcebula/spring-web-http-payload-logger/actions/workflows/maven.yml/badge.svg)](https://github.com/dominikcebula/spring-web-http-payload-logger/actions/workflows/maven.yml)
+[![CI Pipeline](https://github.com/dominikcebula/spring-boot-web-http-payload-logger/actions/workflows/maven.yml/badge.svg)](https://github.com/dominikcebula/spring-boot-web-http-payload-logger/actions/workflows/maven.yml)
 
 # 📦 Spring Boot Web HTTP Payload Logger
 
