@@ -1,0 +1,8 @@
+logging:
+  payload:
+    logger:
+      http:
+        enabled: true
+        config:
+          log2xxSuccessfulStatus: true
+          log5xxServerErrorStatus: true

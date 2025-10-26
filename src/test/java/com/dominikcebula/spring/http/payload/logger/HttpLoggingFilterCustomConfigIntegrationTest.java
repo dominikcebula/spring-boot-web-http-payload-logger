@@ -9,12 +9,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @SpringBootTest(classes = SampleApplicationForTesting.class, webEnvironment = RANDOM_PORT)
-public class HttpLoggingFilterEnabledIntegrationTest {
+@ActiveProfiles({"custom-config"})
+public class HttpLoggingFilterCustomConfigIntegrationTest {
     @LocalServerPort
     private int port;
 
@@ -61,17 +63,26 @@ public class HttpLoggingFilterEnabledIntegrationTest {
     }
 
     @Test
-    void shouldNotLogRequestAndResponseForGetWhenSuccessResponseProduced() {
+    void shouldLogRequestAndResponseForGetWhenSuccessResponseProduced() {
         ResponseEntity<String> response = restTemplate.exchange("/api/ping/2xx", HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo("pong");
 
-        appender.assertDoesNotContain("=== HTTP REQUEST - BEGIN =====================");
-        appender.assertDoesNotContain("=== HTTP REQUEST - END =======================");
+        appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
+        appender.assertContains("Method: GET");
+        appender.assertContains("URL: /api/ping/2xx");
+        appender.assertContains("Headers: {accept=text/plain, application/json, application/*+json, */*");
+        appender.assertContains("Body: ");
+        appender.assertContains("=== HTTP REQUEST - END =======================");
 
-        appender.assertDoesNotContain("=== HTTP RESPONSE - BEGIN =====================");
-        appender.assertDoesNotContain("=== HTTP RESPONSE - END =======================");
+        appender.assertContains("=== HTTP RESPONSE - BEGIN =====================");
+        appender.assertContains("Status: 200");
+        appender.assertContains("Method: GET");
+        appender.assertContains("URL: /api/ping/2xx");
+        appender.assertContains("DurationMs:");
+        appender.assertContains("Body: pong");
+        appender.assertContains("=== HTTP RESPONSE - END =======================");
     }
 
     @Test
@@ -103,7 +114,7 @@ public class HttpLoggingFilterEnabledIntegrationTest {
     }
 
     @Test
-    void shouldNotLogRequestAndResponseForPostWithBodyWhenSuccessResponseProduced() {
+    void shouldLogRequestAndResponseForPostWithBodyWhenSuccessResponseProduced() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         final String body = "hello world";
@@ -113,11 +124,21 @@ public class HttpLoggingFilterEnabledIntegrationTest {
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isEqualTo(body);
 
-        appender.assertDoesNotContain("=== HTTP REQUEST - BEGIN =====================");
-        appender.assertDoesNotContain("=== HTTP REQUEST - END =======================");
+        appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
+        appender.assertContains("Method: POST");
+        appender.assertContains("URL: /api/echo/2xx");
+        appender.assertContains("Headers: {accept=text/plain, application/json");
+        appender.assertContains("Body: " + body);
+        appender.assertContains("=== HTTP REQUEST - END =======================");
 
-        appender.assertDoesNotContain("=== HTTP RESPONSE - BEGIN =====================");
-        appender.assertDoesNotContain("=== HTTP RESPONSE - END =======================");
+        appender.assertContains("=== HTTP RESPONSE - BEGIN =====================");
+        appender.assertContains("Status: 200");
+        appender.assertContains("Method: POST");
+        appender.assertContains("URL: /api/echo/2xx");
+        appender.assertContains("DurationMs:");
+        appender.assertContains("Headers: {}");
+        appender.assertContains("Body: " + body);
+        appender.assertContains("=== HTTP RESPONSE - END =======================");
     }
 
     @Test
