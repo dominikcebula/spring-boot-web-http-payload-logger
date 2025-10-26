@@ -34,13 +34,13 @@ public class HttpLoggingFilterEnabledIntegrationTest {
     }
 
     @Test
-    void shouldLogRequestAndResponseForGet() {
+    void shouldLogRequestAndResponseForGetWhenErrorResponseProduced() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Test", "test-header-value");
 
-        ResponseEntity<String> response = restTemplate.exchange("/api/ping", HttpMethod.GET, new HttpEntity<>(headers), String.class);
+        ResponseEntity<String> response = restTemplate.exchange("/api/ping/5xx", HttpMethod.GET, new HttpEntity<>(headers), String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(response.getBody()).isEqualTo("pong");
 
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
@@ -51,7 +51,7 @@ public class HttpLoggingFilterEnabledIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
         appender.assertContains("=== HTTP RESPONSE - BEGIN =====================");
-        appender.assertContains("Status: 200");
+        appender.assertContains("Status: 500");
         appender.assertContains("Method: GET");
         appender.assertContains("URL: /api/ping");
         appender.assertContains("DurationMs:");
@@ -61,14 +61,14 @@ public class HttpLoggingFilterEnabledIntegrationTest {
     }
 
     @Test
-    void shouldLogRequestAndResponseForPostWithBody() {
+    void shouldLogRequestAndResponseForPostWithBodyWhenErrorResponseProduced() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
         final String body = "hello world";
 
-        ResponseEntity<String> response = restTemplate.postForEntity("/api/echo", new HttpEntity<>(body, headers), String.class);
+        ResponseEntity<String> response = restTemplate.postForEntity("/api/echo/5xx", new HttpEntity<>(body, headers), String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(response.getBody()).isEqualTo(body);
 
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
@@ -79,7 +79,7 @@ public class HttpLoggingFilterEnabledIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
         appender.assertContains("=== HTTP RESPONSE - BEGIN =====================");
-        appender.assertContains("Status: 200");
+        appender.assertContains("Status: 500");
         appender.assertContains("Method: POST");
         appender.assertContains("URL: /api/echo");
         appender.assertContains("DurationMs:");
@@ -89,26 +89,26 @@ public class HttpLoggingFilterEnabledIntegrationTest {
     }
 
     @Test
-    void shouldLogRequestAndResponseForGetWithUrlParameters() {
+    void shouldLogRequestAndResponseForGetWithUrlParametersWhenErrorResponseProduced() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-Test", "test-header-value");
 
-        ResponseEntity<String> response = restTemplate.exchange("/api/ping?param1=value1&param2=value2&param3=value3", HttpMethod.GET, new HttpEntity<>(headers), String.class);
+        ResponseEntity<String> response = restTemplate.exchange("/api/ping/5xx?param1=value1&param2=value2&param3=value3", HttpMethod.GET, new HttpEntity<>(headers), String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(response.getBody()).isEqualTo("pong");
 
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
         appender.assertContains("Method: GET");
-        appender.assertContains("URL: /api/ping?param1=value1&param2=value2&param3=value3");
+        appender.assertContains("URL: /api/ping/5xx?param1=value1&param2=value2&param3=value3");
         appender.assertContains("Headers: {accept=text/plain, application/json, application/*+json, */*, x-test=test-header-value");
         appender.assertContains("Body: ");
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
         appender.assertContains("=== HTTP RESPONSE - BEGIN =====================");
-        appender.assertContains("Status: 200");
+        appender.assertContains("Status: 500");
         appender.assertContains("Method: GET");
-        appender.assertContains("URL: /api/ping?param1=value1&param2=value2&param3=value3");
+        appender.assertContains("URL: /api/ping/5xx?param1=value1&param2=value2&param3=value3");
         appender.assertContains("DurationMs:");
         appender.assertContains("Headers: {Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03}");
         appender.assertContains("Body: pong");

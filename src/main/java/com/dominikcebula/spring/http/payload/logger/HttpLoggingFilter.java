@@ -2,6 +2,7 @@ package com.dominikcebula.spring.http.payload.logger;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.ContentCachingResponseWrapper;
@@ -21,6 +22,12 @@ import java.util.Map;
 public class HttpLoggingFilter extends OncePerRequestFilter {
 
     private static final Log log = LogFactory.getLog("payload.logger.http");
+
+    private final HttpLoggingFilterProperties properties;
+
+    public HttpLoggingFilter(HttpLoggingFilterProperties properties) {
+        this.properties = properties;
+    }
 
     @Override
     protected void doFilterInternal(
@@ -43,9 +50,12 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
             try {
                 long durationMs = System.currentTimeMillis() - startTime;
                 String urlWithQuery = getUrlWithQuery(request.getQueryString(), request.getRequestURI());
+                HttpStatus status = HttpStatus.resolve(wrappedResponse.getStatus());
 
-                logRequest(urlWithQuery, wrappedRequest);
-                logResponse(urlWithQuery, wrappedRequest, wrappedResponse, durationMs);
+                if (properties.isLoggingEnabledForStatus(status)) {
+                    logRequest(urlWithQuery, wrappedRequest);
+                    logResponse(urlWithQuery, wrappedRequest, wrappedResponse, durationMs);
+                }
 
                 wrappedResponse.copyBodyToResponse();
             } catch (Exception e) {

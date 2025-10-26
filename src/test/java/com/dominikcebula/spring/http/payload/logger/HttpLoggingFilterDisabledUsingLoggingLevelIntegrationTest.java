@@ -36,10 +36,10 @@ public class HttpLoggingFilterDisabledUsingLoggingLevelIntegrationTest {
     }
 
     @Test
-    void shouldNotLogRequestOrResponse() {
-        ResponseEntity<String> response = restTemplate.exchange("/api/ping", HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
+    void shouldNotLogRequestOrResponseWhenLoggingFilterIsDisabledUsingLoggingLevel() {
+        ResponseEntity<String> response = restTemplate.exchange("/api/ping/5xx", HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
 
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
         assertThat(response.getBody()).isEqualTo("pong");
 
         appender.assertDoesNotContain("=== HTTP REQUEST - BEGIN =====================");
