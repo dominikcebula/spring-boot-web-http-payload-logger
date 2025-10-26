@@ -12,21 +12,21 @@ After integrating this library into your Spring Web application, you will be abl
 in the following format:
 
 ```text
-c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP REQUEST - BEGIN =====================
-c.d.s.h.p.logger.HttpLoggingFilter       : Method: GET
-c.d.s.h.p.logger.HttpLoggingFilter       : URL: /api/ping?param1=value1&param2=value2&param3=value3
-c.d.s.h.p.logger.HttpLoggingFilter       : Headers: {accept=text/plain, application/json, application/*+json, */*, x-test=test-header-value, user-agent=Java/17.0.15, host=localhost:34491, connection=keep-alive}
-c.d.s.h.p.logger.HttpLoggingFilter       : Body: hello world
-c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP REQUEST - END =======================
+=== HTTP REQUEST - BEGIN =====================
+Method: GET
+URL: /api/ping?param1=value1&param2=value2&param3=value3
+Headers: {accept=text/plain, application/json, application/*+json, */*, x-test=test-header-value, user-agent=Java/17.0.15, host=localhost:34491, connection=keep-alive}
+Body: hello world
+=== HTTP REQUEST - END =======================
 
-c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP RESPONSE - BEGIN =====================
-c.d.s.h.p.logger.HttpLoggingFilter       : Status: 200
-c.d.s.h.p.logger.HttpLoggingFilter       : Method: GET
-c.d.s.h.p.logger.HttpLoggingFilter       : URL: /api/ping?param1=value1&param2=value2&param3=value3
-c.d.s.h.p.logger.HttpLoggingFilter       : DurationMs: 15
-c.d.s.h.p.logger.HttpLoggingFilter       : Headers: {Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03}
-c.d.s.h.p.logger.HttpLoggingFilter       : Body: hello world
-c.d.s.h.p.logger.HttpLoggingFilter       : === HTTP RESPONSE - END =======================
+=== HTTP RESPONSE - BEGIN =====================
+Status: 200
+Method: GET
+URL: /api/ping?param1=value1&param2=value2&param3=value3
+DurationMs: 15
+Headers: {Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03}
+Body: hello world
+=== HTTP RESPONSE - END =======================
 ```
 
 ## 🚀 Usage
@@ -49,7 +49,21 @@ response payloads.
 
 ### Configure which payloads get logged
 
-TBD
+**By default**, the library logs HTTP request and response **only when the result of the request processing is
+unsuccessful with 5xx HTTP status code**.
+
+You can change this behavior and configure which payloads get logged using the below properties that enable/disable
+payload logging based on HTTP status code:
+
+```yaml
+logging:
+  payload:
+    logger:
+      http:
+        config:
+          log2xxSuccessfulStatus: true
+          log5xxServerErrorStatus: true
+```
 
 ### Enable/Disable Payload Logging
 
