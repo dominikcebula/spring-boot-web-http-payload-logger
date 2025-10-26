@@ -61,6 +61,20 @@ public class HttpLoggingFilterEnabledIntegrationTest {
     }
 
     @Test
+    void shouldNotLogRequestAndResponseForGetWhenSuccessResponseProduced() {
+        ResponseEntity<String> response = restTemplate.exchange("/api/ping/2xx", HttpMethod.GET, new HttpEntity<>(new HttpHeaders()), String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo("pong");
+
+        appender.assertDoesNotContain("=== HTTP REQUEST - BEGIN =====================");
+        appender.assertDoesNotContain("=== HTTP REQUEST - END =======================");
+
+        appender.assertDoesNotContain("=== HTTP RESPONSE - BEGIN =====================");
+        appender.assertDoesNotContain("=== HTTP RESPONSE - END =======================");
+    }
+
+    @Test
     void shouldLogRequestAndResponseForPostWithBodyWhenErrorResponseProduced() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.TEXT_PLAIN);
@@ -86,6 +100,24 @@ public class HttpLoggingFilterEnabledIntegrationTest {
         appender.assertContains("Headers: {}");
         appender.assertContains("Body: " + body);
         appender.assertContains("=== HTTP RESPONSE - END =======================");
+    }
+
+    @Test
+    void shouldNotLogRequestAndResponseForPostWithBodyWhenSuccessResponseProduced() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
+        final String body = "hello world";
+
+        ResponseEntity<String> response = restTemplate.postForEntity("/api/echo/2xx", new HttpEntity<>(body, headers), String.class);
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo(body);
+
+        appender.assertDoesNotContain("=== HTTP REQUEST - BEGIN =====================");
+        appender.assertDoesNotContain("=== HTTP REQUEST - END =======================");
+
+        appender.assertDoesNotContain("=== HTTP RESPONSE - BEGIN =====================");
+        appender.assertDoesNotContain("=== HTTP RESPONSE - END =======================");
     }
 
     @Test
