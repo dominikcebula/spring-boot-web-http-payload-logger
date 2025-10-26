@@ -56,10 +56,14 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
                     logRequest(urlWithQuery, wrappedRequest);
                     logResponse(urlWithQuery, wrappedRequest, wrappedResponse, durationMs);
                 }
-
-                wrappedResponse.copyBodyToResponse();
             } catch (Exception e) {
                 log.warn("Failed to log HTTP request/response", e);
+            }
+
+            try {
+                wrappedResponse.copyBodyToResponse();
+            } catch (Exception e) {
+                log.error("Failed to copy response body to the output stream", e);
             }
         }
     }
