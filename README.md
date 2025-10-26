@@ -47,6 +47,10 @@ response payloads.
 
 ## ⚙️ Customize
 
+### Configure which payloads get logged
+
+TBD
+
 ### Enable/Disable Payload Logging
 
 Just after adding the dependency, the HTTP payload logging is enabled by default. You can disable or enable it using one
@@ -54,19 +58,39 @@ of the methods described below.
 
 #### Using Spring Boot Properties
 
-TBD
+You can enable/disabled the HTTP payload logging by setting `logging.payload.logger.http.enabled` Spring property.
+
+For example, you can add the following line to your `application.yaml` file to disable the logging:
+
+```yaml
+logging:
+  payload:
+    logger:
+      http:
+        enabled: false
+```
 
 #### Using Environment Variable
 
-TBD
+On top of using Spring Boot properties, you can also use environment variables to enable/disable the HTTP payload
+logging.
+
+Set the`LOGGING_PAYLOAD_LOGGER_HTTP_ENABLED` environment variable to `true` or `false`.
 
 #### Using Logger Level
 
-TBD
+`HttpLoggingFilter` logs the HTTP payloads at the `DEBUG` log level on `payload.logger.http` logger.
 
-### Enable/Disable Error Only Payload Logging
+You can control configuration for `payload.logger.http` using `application.yaml` file as well.
 
-TBD
+For example, you can add the following lines to your `application.yaml` file to set the log level for
+`payload.logger.http`.
+
+```yaml
+logging:
+  level:
+    payload.logger.http: FINEST
+```
 
 ## ✍️ Author
 
