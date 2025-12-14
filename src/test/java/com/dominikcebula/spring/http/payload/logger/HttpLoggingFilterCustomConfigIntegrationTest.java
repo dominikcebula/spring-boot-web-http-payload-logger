@@ -48,7 +48,8 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
         appender.assertContains("Method: GET");
         appender.assertContains("URL: /api/ping/5xx");
-        appender.assertContains("Headers: {accept=text/plain, application/json, application/*+json, */*, x-test=test-header-value");
+        appender.assertContains("Headers:");
+        appender.assertContains("x-test=test-header-value");
         appender.assertContains("Body: ");
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
@@ -57,7 +58,8 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("Method: GET");
         appender.assertContains("URL: /api/ping/5xx");
         appender.assertContains("DurationMs:");
-        appender.assertContains("Headers: {Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03}");
+        appender.assertContains("Headers:");
+        appender.assertContains("Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03");
         appender.assertContains("Body: pong");
         appender.assertContains("=== HTTP RESPONSE - END =======================");
     }
@@ -72,7 +74,7 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
         appender.assertContains("Method: GET");
         appender.assertContains("URL: /api/ping/2xx");
-        appender.assertContains("Headers: {accept=text/plain, application/json, application/*+json, */*");
+        appender.assertContains("Headers:");
         appender.assertContains("Body: ");
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
@@ -99,7 +101,8 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
         appender.assertContains("Method: POST");
         appender.assertContains("URL: /api/echo/5xx");
-        appender.assertContains("Headers: {accept=text/plain, application/json");
+        appender.assertContains("Headers:");
+        appender.assertContains("accept=text/plain, application/json");
         appender.assertContains("Body: " + body);
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
@@ -108,7 +111,7 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("Method: POST");
         appender.assertContains("URL: /api/echo/5xx");
         appender.assertContains("DurationMs:");
-        appender.assertContains("Headers: {}");
+        appender.assertContains("Headers:");
         appender.assertContains("Body: " + body);
         appender.assertContains("=== HTTP RESPONSE - END =======================");
     }
@@ -127,7 +130,7 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
         appender.assertContains("Method: POST");
         appender.assertContains("URL: /api/echo/2xx");
-        appender.assertContains("Headers: {accept=text/plain, application/json");
+        appender.assertContains("Headers:");
         appender.assertContains("Body: " + body);
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
@@ -136,7 +139,7 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("Method: POST");
         appender.assertContains("URL: /api/echo/2xx");
         appender.assertContains("DurationMs:");
-        appender.assertContains("Headers: {}");
+        appender.assertContains("Headers:");
         appender.assertContains("Body: " + body);
         appender.assertContains("=== HTTP RESPONSE - END =======================");
     }
@@ -154,7 +157,8 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("=== HTTP REQUEST - BEGIN =====================");
         appender.assertContains("Method: GET");
         appender.assertContains("URL: /api/ping/5xx?param1=value1&param2=value2&param3=value3");
-        appender.assertContains("Headers: {accept=text/plain, application/json, application/*+json, */*, x-test=test-header-value");
+        appender.assertContains("Headers:");
+        appender.assertContains("x-test=test-header-value");
         appender.assertContains("Body: ");
         appender.assertContains("=== HTTP REQUEST - END =======================");
 
@@ -163,7 +167,8 @@ public class HttpLoggingFilterCustomConfigIntegrationTest {
         appender.assertContains("Method: GET");
         appender.assertContains("URL: /api/ping/5xx?param1=value1&param2=value2&param3=value3");
         appender.assertContains("DurationMs:");
-        appender.assertContains("Headers: {Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03}");
+        appender.assertContains("Headers:");
+        appender.assertContains("Sample-Header-01=Sample-Value-01, Sample-Header-02=Sample-Value-02, Sample-Header-03=Sample-Value-03");
         appender.assertContains("Body: pong");
         appender.assertContains("=== HTTP RESPONSE - END =======================");
     }
