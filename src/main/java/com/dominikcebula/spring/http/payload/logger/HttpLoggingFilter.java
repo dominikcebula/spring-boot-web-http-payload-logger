@@ -85,10 +85,10 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
         String requestBody = getRequestBody(request);
 
         log.debug("=== HTTP REQUEST - BEGIN =====================");
-        log.debug("Method: " + request.getMethod());
-        log.debug("URL: " + urlWithQuery);
-        log.debug("Headers: " + headers);
-        log.debug("Body: " + requestBody);
+        log.debug("Request Method: " + request.getMethod());
+        log.debug("Request URL: " + urlWithQuery);
+        log.debug("Request Headers: " + headers);
+        log.debug("Request Body: " + requestBody);
         log.debug("=== HTTP REQUEST - END =======================");
     }
 
@@ -99,12 +99,12 @@ public class HttpLoggingFilter extends OncePerRequestFilter {
         String responseBody = getResponseBody(response);
 
         log.debug("=== HTTP RESPONSE - BEGIN =====================");
-        log.debug("Status: " + response.getStatus());
-        log.debug("Method: " + request.getMethod());
-        log.debug("URL: " + urlWithQuery);
-        log.debug("DurationMs: " + durationMs);
-        log.debug("Headers: " + headers);
-        log.debug("Body: " + responseBody);
+        log.debug("Response Status: " + response.getStatus());
+        log.debug("Response Method: " + request.getMethod());
+        log.debug("Response URL: " + urlWithQuery);
+        log.debug("Response DurationMs: " + durationMs);
+        log.debug("Response Headers: " + headers);
+        log.debug("Response Body: " + responseBody);
         log.debug("=== HTTP RESPONSE - END =======================");
     }
 
